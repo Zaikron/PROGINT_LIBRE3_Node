@@ -1,8 +1,8 @@
 const http = require("http");
 const fs = require('fs').promises;
 
-const host = 'localhost';
-const port = 8000;
+const host = '0.0.0.0'; // Escucha en todas las direcciones
+const port = process.env.PORT || 8000; // Usa el puerto proporcionado por Render o 8000 por defecto
 let indexFile;
 
 const requestListener = function (req, res) {
