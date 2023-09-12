@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir y Previsualizar Imagen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center w-full h-screen bg-gray-100">
+    
+    <div class="grid grid-cols-1 lg:w-1/2 md:w-1/2 sm:w-3/4 h-3/4 border shadow-lg rounded-md">
+        <div class="bg-white flex items-center justify-center">
+            <div class="grid grid-cols-1 bg-white">
+                <div class="p-8">
+                    <h1 class="font-sans sm:text-lg md:text-2xl lg:text-3xl font-bold text-gray-700">Subir y Previsualizar Imagen</h1>
+                </div>
+                <!-- Formulario para subir la imagen -->
+                <div class="flex items-center justify-center">
+                    <form id="imageForm" enctype="multipart/form-data">
+                        <label for="imageInput" class="custom-file-upload">
+                            Seleccionar Archivo
+                        </label>
+                        <input type="file" id="imageInput" accept="image/*" style="display: none;" />
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Contenedor para previsualizar la imagen -->
+        <div id="imagePreview" class="bg-white flex items-center justify-center">
+            <img id="preview" src="image.png" alt="Vista previa de la imagen" style="max-width: 100%;" />
+        </div>
+    </div>
+    
+
+    <script>
+        // Función para previsualizar la imagen seleccionada
+        function previewImage() {
+            var input = document.getElementById('imageInput');
+            var preview = document.getElementById('preview');
+
+            input.addEventListener('change', function () {
+                var file = input.files[0];
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        preview.src = e.target.result;
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Llamar a la función de previsualización al cargar la página
+        window.onload = previewImage;
+    </script>
+
+<style>
+    /* Estilos para el botón de carga de archivos */
+    #imageInput {
+        display: inline-block; /* Oculta el input real */
+        background-color: #007bff;
+    }
+
+    .custom-file-upload {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+    }
+
+    /* Estilos para el mensaje de archivo seleccionado */
+    #file-selected-message {
+        display: inline-block;
+        margin-top: 10px;
+        font-weight: bold;
+        background-color: red;
+    }
+</style>
+</body>
+</html>
